@@ -1,0 +1,46 @@
+<div class="block">
+    <span class="margin-right">Mapping for:</span>
+    <select [(ngModel)]="mapping.modelName" (ngModelChange)="setCurrentModel($event)" class="margin-right">
+        <option *ngFor="let modelName of modelNames" [ngValue]="modelName">
+            {{modelName}}
+        </option>
+    </select>
+
+    <select [(ngModel)]="mapping.fieldName" class="margin-right" [hidden]="mapping.modelName==null">
+        <option *ngFor="let field of modelFields" [ngValue]="field">
+            {{field}}
+        </option>
+    </select>
+
+    <button (click)="addMappingRule()" [hidden]="mapping.fieldName==null">
+        Add mapping rule
+    </button>
+</div>
+
+<div *ngFor="let mappingRule of mapping.mappingRules" class="margin-left block">
+    <div class="block">
+        <span class="margin-right">Maps to</span>
+        <select [(ngModel)]="mappingRule.mapsToType" class="margin-right">
+            <option value="Constant">Constant Value</option>
+            <option value="UDField">User Defined field</option>
+        </select>
+
+        <input class="margin-right" type="text" [(ngModel)]="mappingRule.mapsToValue" [hidden]="mappingRule.mapsToType!='Constant'"/>
+        <input class="margin-right" type="text" [(ngModel)]="mappingRule.UdGroup" [hidden]="mappingRule.mapsToType!='UDField'" placeholder="UD Group"/>
+        <input class="margin-right" type="text" [(ngModel)]="mappingRule.UdField" [hidden]="mappingRule.mapsToType!='UDField'" placeholder="UD Field"/>
+
+        <select [(ngModel)]="mappingRule.LinkedId" class="margin-right" [hidden]="mappingRule.mapsToType!='UDField'" placeholder="Linked Id">
+            <option *ngFor="let field of getLinkedIdFields()">{{field}}</option>
+        </select>
+
+        <span>when following condition is met:</span>
+    </div>
+    <div class="block">
+        <app-fv-query-builder id="query-builder" class="margin30" [data]="mappingRule.query" [config]="config"></app-fv-query-builder>
+    </div>
+    <div class="block">
+        <button (click)="removeMappingRule(mappingRule)">
+            Remove mapping rule
+        </button>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+.margin-right {
+    margin-right: 10px;
+}
+
+.margin-left {
+    margin-left: 10px;
+}
+
+.block {
+    padding: 5px;
+    min-height: 25px;
+}

@@ -1,0 +1,13 @@
+<div class="block">
+    <button (click)="addMapping()">
+        Add mapping
+    </button>
+    <div *ngFor="let mapping of mappings" class="block margin-left">
+        <app-mapping-rule [mapping]="mapping"></app-mapping-rule>
+        <button (click)="removeMapping(mapping)">
+            Remove mapping
+        </button>
+    </div>
+</div>
+
+<textarea [value]="mappings | json"></textarea>
