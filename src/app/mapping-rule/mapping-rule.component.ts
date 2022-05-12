@@ -20,14 +20,15 @@ export class MappingRuleComponent implements OnInit {
   constructor(private mappingRuleService: MappingRuleService) { }
 
   ngOnInit() {
-    this.modelNames = ["courseTranscriptModel"];
+    this.modelNames = this.mappingRuleService.getResultModelNames();
+
+    if(this.mapping.modelName) {
+      this.setupMapping(this.mapping.modelName);
+    }
   }
 
   setCurrentModel(model) {
-    switch(model) {
-      case "courseTranscriptModel":
-        this.setupMapping(model);
-    }
+    this.setupMapping(model);
   }
 
   setupMapping(model: string) {

@@ -19,15 +19,15 @@
 
 <div *ngFor="let mappingRule of mapping.mappingRules" class="margin-left block">
     <div class="block">
-        <span class="margin-right">Maps to</span>
+        <span class="margin-right">Map to</span>
         <select [(ngModel)]="mappingRule.mapsToType" class="margin-right">
             <option value="Constant">Constant Value</option>
             <option value="UDField">User Defined field</option>
         </select>
 
-        <input class="margin-right" type="text" [(ngModel)]="mappingRule.mapsToValue" [hidden]="mappingRule.mapsToType!='Constant'"/>
-        <input class="margin-right" type="text" [(ngModel)]="mappingRule.UdGroup" [hidden]="mappingRule.mapsToType!='UDField'" placeholder="UD Group"/>
-        <input class="margin-right" type="text" [(ngModel)]="mappingRule.UdField" [hidden]="mappingRule.mapsToType!='UDField'" placeholder="UD Field"/>
+        <input class="margin-right" type="text" [(ngModel)]="mappingRule.constantValue" [hidden]="mappingRule.mapsToType!='Constant'"/>
+        <input class="margin-right" type="text" [(ngModel)]="mappingRule.udGroup" [hidden]="mappingRule.mapsToType!='UDField'" placeholder="UD Group"/>
+        <input class="margin-right" type="text" [(ngModel)]="mappingRule.udField" [hidden]="mappingRule.mapsToType!='UDField'" placeholder="UD Field"/>
 
         <select [(ngModel)]="mappingRule.LinkedId" class="margin-right" [hidden]="mappingRule.mapsToType!='UDField'" placeholder="Linked Id">
             <option *ngFor="let field of getLinkedIdFields()">{{field}}</option>

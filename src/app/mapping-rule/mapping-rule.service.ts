@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
 export type Model = {
     model: {}
@@ -10,8 +9,10 @@ export type Model = {
     providedIn: 'root',
 })
 export class MappingRuleService {
-    constructor(private httpClient: HttpClient) {}
-    
+    getResultModelNames() {
+        return ["courseTranscript"];
+    }
+
     getResultModel(model: string) : Model {
         return {
             name: "CourseTranscript",
@@ -36,7 +37,7 @@ export class MappingRuleService {
             }
         }
     }
-    
+
     getMappingSources(mappingModel: string) : Model[] {
         let transcriptModel = {
             name: "Transcript",
